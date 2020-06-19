@@ -16,7 +16,7 @@ from utilities.mdtex import MDTeXDocument, Bold, Section, KeyValueItem, SubSecti
 
 logging.basicConfig(level=logging.WARNING)
 
-bot = TelegramClient('inactivity_checker', 653921, config.api_hash)
+bot = TelegramClient('inactivity_checker', config.api_id, config.api_hash)
 
 
 @bot.on(events.NewMessage(incoming=True, pattern='info'))
