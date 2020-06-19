@@ -33,7 +33,7 @@ async def pn_info(event: NewMessage.Event) -> None:
                     f'Um einen Check auszuführen fügst du mich der Gruppe hinzu und schreibst dann dort  `..inaktivität`'
                     f'\n\n'
                     f'Daraufhin werde ich die Gruppe nach Leuten durchsuchen die keine Nachricht darin haben (dazu '
-                    f'zählen auch Leute deren Nachrichten wieder gelöscht wurden'
+                    f'zählen auch Leute deren Nachrichten wieder gelöscht wurden)'
                     f'\n'
                     f'\n'
                     f'Wenn ich Bannrechte habe werde ich die User auch sofort aus der Gruppe entfernen.'
