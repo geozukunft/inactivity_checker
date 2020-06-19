@@ -2,3 +2,4 @@
 /build/
 /inactivity_checker.session
 /inactivity_checker.session-journal
+/config.py
