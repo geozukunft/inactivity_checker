@@ -7,7 +7,7 @@ from telethon.errors import UserAdminInvalidError, FloodWaitError
 from telethon.events import NewMessage
 from telethon.tl.custom import Message
 from telethon.tl.functions.channels import GetParticipantRequest, EditBannedRequest
-from telethon.tl.types import User, Channel, ChannelParticipantAdmin, ChatBannedRights
+from telethon.tl.types import User, Channel, ChannelParticipantAdmin, ChatBannedRights, ChannelParticipantCreator
 import config
 
 import logging
@@ -79,7 +79,7 @@ async def cleanup_group_admins(event: NewMessage.Event) -> None:
         client: TelegramClient = event.client
         uid = msg.from_id
         result = await client(GetParticipantRequest(event.chat_id, uid))
-        if isinstance(result.participant, ChannelParticipantAdmin):
+        if isinstance(result.participant, (ChannelParticipantAdmin, ChannelParticipantCreator)):
             await cleanup(event)
 
 
