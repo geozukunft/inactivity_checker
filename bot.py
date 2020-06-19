@@ -19,6 +19,7 @@ logging.basicConfig(level=logging.WARNING)
 bot = TelegramClient('inactivity_checker', config.api_id, config.api_hash)
 
 
+@bot.on(events.NewMessage(incoming=True, pattern='Info'))
 @bot.on(events.NewMessage(incoming=True, pattern='info'))
 async def pn_info(event: NewMessage.Event) -> None:
     client: TelegramClient = event.client
@@ -110,34 +111,35 @@ async def _cleanup_chat(event, count: bool = False,
 
             if not count:
                 try:
-                    await client(EditBannedRequest(chat, user, ChatBannedRights(until_date=datetime.datetime(2038, 1, 1),
-                                                                            view_messages=True)))
+                    await client(
+                        EditBannedRequest(chat, user, ChatBannedRights(until_date=datetime.datetime(2038, 1, 1),
+                                                                       view_messages=True)))
                 except UserAdminInvalidError:
                     deleted_admins += 1
                 except FloodWaitError as error:
                     if progress_message is not None:
                         progress = Section(Bold('Cleanup | FloodWait'),
-                                       Bold(f'Got FloodWait for {error.seconds}s. Sleeping.'),
-                                       KeyValueItem(Bold('Progress'),
-                                                    f'{user_counter}/{participant_count}'),
-                                       KeyValueItem(deleted_accounts_label, deleted_users))
+                                           Bold(f'Got FloodWait for {error.seconds}s. Sleeping.'),
+                                           KeyValueItem(Bold('Progress'),
+                                                        f'{user_counter}/{participant_count}'),
+                                           KeyValueItem(deleted_accounts_label, deleted_users))
                         await progress_message.edit(str(progress))
 
                     await asyncio.sleep(error.seconds)
-                    await client(EditBannedRequest(chat, user, ChatBannedRights(until_date=datetime.datetime(2038, 1, 1),
-                                                                            view_messages=True)))
+                    await client(
+                        EditBannedRequest(chat, user, ChatBannedRights(until_date=datetime.datetime(2038, 1, 1),
+                                                                       view_messages=True)))
             elif count:
                 inactive_users += f'\n {Mention(user.first_name, user.id)}'
-
 
     return str((
         Section(Bold('Cleanup'),
                 KeyValueItem(deleted_accounts_label, deleted_users),
                 KeyValueItem(Bold('Inactive Admins'), deleted_admins) if deleted_admins else None,
-        SubSection(Bold('Users:'),
-                    inactive_users
+                SubSection(Bold('Users:'),
+                           inactive_users
 
-                   ) if len(inactive_users) >= 2 else None
+                           ) if len(inactive_users) >= 2 else None
 
                 )))
 
