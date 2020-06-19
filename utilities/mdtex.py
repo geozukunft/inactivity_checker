@@ -1,5 +1,7 @@
 """Module containing classes to ease creation of nicely formatted messages.
-I called it MDTeX because I'm uncreative and the idea of SubSection and SubSubSection
+Coded by @Sitischu for his kantek project
+https://github.com/mojurasu/kantek/blob/develop/kantek/utils/mdtex.py
+I called it MDTeX because Sitischu is uncreative and the idea of SubSection and SubSubSection
  was taken from LaTeX
 """
 from typing import Union
