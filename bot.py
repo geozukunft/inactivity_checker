@@ -41,7 +41,10 @@ async def pn_info(event: NewMessage.Event) -> None:
                     f'\n'
                     f'Es ist egal seit wann ich in der Gruppe bin. Also wenn du nicht möchtest das ich permanent in '
                     f'der Gruppe bin darfst du mich auch gerne wieder entfernen und wieder hinzufügen wenn du den '
-                    f'nächsten check machen möchtest.', parse_mode='markdown')
+                    f'nächsten check machen möchtest.'
+                    f'\n'
+                    f'Den Sourcecode findet ihr auf Github:\n'
+                    f'https://github.com/GodOfOwls/inactivity_checker', parse_mode='markdown')
 
 
 @bot.on(events.NewMessage(outgoing=True, pattern='..inaktivität'))
